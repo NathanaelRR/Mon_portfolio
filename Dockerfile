@@ -22,3 +22,11 @@ CMD ["sh", "-c", "\
     php artisan migrate --force || true; \
     php artisan serve --host=0.0.0.0 --port=${PORT:-8080} \
 "]
+
+# Créer tous les dossiers nécessaires à Laravel
+RUN mkdir -p storage/framework/cache \
+    storage/framework/views \
+    storage/framework/sessions \
+    storage/logs \
+    bootstrap/cache \
+ && chmod -R 775 storage bootstrap/cache

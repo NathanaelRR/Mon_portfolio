@@ -20,7 +20,7 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
 # Permissions pour storage et cache
-RUN chmod -R 755 storage bootstrap/cache
+# RUN chmod -R 755 storage bootstrap/cache
 
 # Exposer le port par défaut (Render fournit $PORT)
 EXPOSE 8080

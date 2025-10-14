@@ -23,7 +23,13 @@ RUN touch database/database.sqlite
 RUN chmod 666 database/database.sqlite
 
 # Créer les dossiers storage et cache avec permissions
-RUN mkdir -p storage bootstrap/cache
+RUN mkdir -p storage/framework/views \
+    storage/framework/cache \
+    storage/framework/sessions \
+    bootstrap/cache
+
+
+# Donner les permissions à Laravel pour écrire
 RUN chmod -R 777 storage bootstrap/cache
 
 # Exécuter les migrations (ignore si déjà fait)

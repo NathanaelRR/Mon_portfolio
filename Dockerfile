@@ -1,12 +1,13 @@
-# Utilise l'image officielle PHP avec extensions nécessaires
+# Image PHP officielle avec extensions nécessaires
 FROM php:8.2-cli
 
-# Installer les extensions nécessaires pour SQLite et unzip/git
+# Installer extensions et outils
 RUN apt-get update && apt-get install -y \
     unzip \
     git \
     libsqlite3-dev \
-    nodejs npm \
+    nodejs \
+    npm \
     && docker-php-ext-install pdo pdo_sqlite
 
 # Installer Composer
@@ -18,18 +19,18 @@ WORKDIR /var/www
 # Copier tout le projet
 COPY . .
 
-# Installer les dépendances PHP
+# Installer dépendances PHP
 RUN composer install --no-dev --optimize-autoloader
 
-# Installer les dépendances Node et compiler les assets Vite
+# Installer dépendances Node et compiler assets Vite
 RUN npm install
 RUN npm run build
 
-# Créer le fichier SQLite si nécessaire et donner les permissions
+# Créer fichier SQLite si nécessaire
 RUN touch database/database.sqlite
 RUN chmod 666 database/database.sqlite
 
-# Créer les dossiers de storage et bootstrap/cache avec les permissions correctes
+# Créer dossiers storage et bootstrap/cache avec permissions correctes
 RUN mkdir -p storage/framework/views \
     storage/framework/cache \
     storage/framework/sessions \
@@ -39,8 +40,8 @@ RUN chmod -R 777 storage bootstrap/cache
 # Créer le lien symbolique pour les fichiers publics depuis storage
 RUN php artisan storage:link
 
-# Exposer le port utilisé par Render
+# Exposer le port Render
 EXPOSE 10000
 
-# Démarrer le serveur PHP intégré sur le dossier public
+# Démarrer serveur PHP intégré sur dossier public
 CMD ["php", "-S", "0.0.0.0:10000", "-t", "public"]

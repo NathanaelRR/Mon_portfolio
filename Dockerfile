@@ -18,8 +18,14 @@ COPY . .
 # Installer les dépendances
 RUN composer install --no-dev --optimize-autoloader
 
-# Générer la clé Laravel et migrer la DB
-# RUN php artisan key:generate
+# Créer le fichier SQLite si nécessaire
+RUN touch database/database.sqlite
+
+# Créer les dossiers storage et cache avec permissions
+RUN mkdir -p storage bootstrap/cache
+RUN chmod -R 777 storage bootstrap/cache
+
+# Exécuter les migrations (ignore si déjà fait)
 RUN php artisan migrate --force || true
 
 # Exposer le port de Render

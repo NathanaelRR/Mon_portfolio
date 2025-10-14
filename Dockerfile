@@ -19,7 +19,7 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 # Générer la clé Laravel et migrer la DB
-RUN php artisan key:generate
+# RUN php artisan key:generate
 RUN php artisan migrate --force || true
 
 # Exposer le port de Render

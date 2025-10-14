@@ -8,6 +8,18 @@ RUN apt-get update && apt-get install -y \
     libsqlite3-dev \
     && docker-php-ext-install pdo pdo_sqlite
 
+# Installer Node et NPM si nécessaire
+RUN apt-get update && apt-get install -y nodejs npm
+
+# Copier package.json et package-lock.json
+COPY package.json package-lock.json ./
+
+# Installer les dépendances Node
+RUN npm install
+
+# Compiler les assets pour la production
+RUN npm run build
+
 # Installer Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
@@ -39,4 +51,6 @@ RUN php artisan migrate --force || true
 EXPOSE 10000
 
 # Commande pour démarrer Laravel
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=10000"]
+RUN php artisan storage:link
+# CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=10000"]
+CMD ["php", "-S", "0.0.0.0:10000", "-t", "public"]

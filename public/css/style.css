@@ -535,7 +535,7 @@ header {
 /* === RESPONSIVE === */
 
 /* Petits écrans : mobile portrait */
-@media (max-width: 640px) {
+/* @media (max-width: 640px) {
     body {
         padding: 1rem;
     }
@@ -567,7 +567,6 @@ header {
         margin-bottom: 1.5rem;
     }
 
-    /* Style “tag” pour les boutons de filtre */
     .filter-btn {
         padding: 0.3rem 0.6rem;
         font-size: 0.75rem;
@@ -625,34 +624,31 @@ header {
     .bloc-left,
     .bloc-right {
         width: 100%;
-        /* on garde le padding et border-radius existants */
         padding: 1rem;
         box-sizing: border-box;
         margin-bottom: 1.5rem;
     }
 
     .projet-columns {
-        flex-direction: column; /* empile verticalement seulement sur mobile */
         gap: 1.5rem;
-        align-items: center; /* centre les blocs */
+        align-items: center;
     }
 
     .image-section-container {
-        padding: 1rem 0; /* on garde un peu d’espace pour le scroll */
+        padding: 1rem 0;
         overflow-x: auto;
     }
 
     .image-item img {
         width: auto;
-        max-width: 90%; /* prend une bonne place dans le conteneur scrollable */
+        max-width: 90%;
         max-height: 180px;
         height: auto;
-        object-fit: cover; /* garde les proportions */
+        object-fit: cover;
         border-radius: 8px;
     }
 }
 
-/* Tablettes : medium screens */
 @media (min-width: 641px) and (max-width: 1024px) {
     .main-nav ul {
         gap: 1.5rem;
@@ -718,7 +714,6 @@ header {
   }
 }
 
-/* Grands écrans : desktop large */
 @media (min-width: 1025px) {
     .container,
     .section-projets .container {
@@ -747,7 +742,6 @@ header {
     }
 }
 
-/* Effet de halo (glow) */
 @keyframes glow {
   from {
     text-shadow: 0 0 5px white, 0 0 10px white;
@@ -757,7 +751,6 @@ header {
   }
 }
 
-/* Apparition douce */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -772,7 +765,126 @@ header {
 @keyframes rotate {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+} */
+
+
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 1024px) {
+  body {
+    padding: 1rem;
+  }
+
+  section, header, footer {
+    width: 95%;
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .section-bienvenue {
+    height: auto;
+    padding: 2rem 1rem;
+    font-size: 1rem;
+  }
+
+  .section-bienvenue h4 {
+    font-size: 1.4rem;
+  }
+
+  .section-projets .container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .projet-card {
+    width: 90%;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .projet-columns {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .bloc-left, .bloc-right {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .image-section-container {
+    padding: 0.5rem 0;
+  }
+
+  .image-item img {
+    height: 140px;
+    min-width: 160px;
+  }
+
+  .section-presentation {
+    margin: 2rem 1rem;
+    padding: 1.5rem;
+  }
+
+  .section-presentation h2 {
+    font-size: 1.5rem;
+  }
+
+  .section-profil {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .section-profil .col {
+    min-width: 100%;
+    padding: 15px;
+  }
 }
+
+@media (max-width: 640px) {
+  .main-nav ul {
+    gap: 0.5rem;
+  }
+
+  .section-bienvenue h4 {
+    font-size: 1.2rem;
+  }
+
+  .btn, .btn-update, .btn-secondary, .btn-danger {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .projet-card h3 {
+    font-size: 1rem;
+  }
+
+  .projet-card p.resume {
+    -webkit-line-clamp: 2;
+    min-height: 2.4em;
+  }
+
+  .projet-card .techno-list {
+    -webkit-line-clamp: 1;
+    min-height: 1em;
+  }
+
+  .image-item img {
+    height: 100px;
+    min-width: 120px;
+  }
+}
+
 
 
 

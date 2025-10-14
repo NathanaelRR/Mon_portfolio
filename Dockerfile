@@ -20,6 +20,7 @@ RUN composer install --no-dev --optimize-autoloader
 
 # Créer le fichier SQLite si nécessaire
 RUN touch database/database.sqlite
+RUN chmod 666 database/database.sqlite
 
 # Créer les dossiers storage et cache avec permissions
 RUN mkdir -p storage bootstrap/cache

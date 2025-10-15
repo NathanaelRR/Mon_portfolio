@@ -662,10 +662,8 @@ button:hover, .btn:hover {
 }
 
   .section-presentation {
-    /* margin: 2rem 1rem;
-    padding: 1.5rem; */
-    flex-direction: column;
-    gap: 1rem;
+    margin: 2rem 1rem;
+    padding: 1.5rem;
   }
 
   .section-presentation h2 {

@@ -4,9 +4,12 @@
     <script src="{{ asset('js/filtre.js') }}"></script>
 
     <section id="presentation" class="section-presentation">
-        <h2>Hey, je suis Nathanaël Rasoamanana.</h2>
-        <p>Étudiant en <strong>Master MIASHS - Informatique et Cognition </strong> à l'Université de Grenoble Alpes.</p>
-        <p>Je développe une expertise principalement orientée vers le <strong>développement informatique et web</strong>, tout en gardant une ouverture vers les <strong>sciences cognitives et comportementales.</strong></p>
+        <div class="container">
+
+            <h2>Hey, je suis Nathanaël Rasoamanana.</h2>
+            <p>Étudiant en <strong>Master MIASHS - Informatique et Cognition </strong> à l'Université de Grenoble Alpes.</p>
+            <p>Je développe une expertise principalement orientée vers le <strong>développement informatique et web</strong>, tout en gardant une ouverture vers les <strong>sciences cognitives et comportementales.</strong></p>
+        </div>
     </section>
 
      <section id="bienvenue" class="section-bienvenue">
@@ -14,6 +17,8 @@
     </section>
 
     <section id="profil" class="section-profil">
+        <div class="container">
+
             <div class="col" id="div1">
                 <h3>Engagements & Bénévolats</h3>
                 <ul class="engagements">
@@ -50,7 +55,8 @@
                 </li>
                 </ul>
             </div>
-        </section>
+        </div>
+    </section>
 
     <section id="projets" class="section-projets">
 

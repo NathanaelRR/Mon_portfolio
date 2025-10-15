@@ -5,8 +5,8 @@
 @section('content')
 <script src="{{ asset('js/techno.js') }}"></script>
 
-<div class="container">
     <div class="section-projets">projet-column
+<div class="container">
 
         <!-- Bloc gauche : infos principales + images -->
         <div class="bloc-left">

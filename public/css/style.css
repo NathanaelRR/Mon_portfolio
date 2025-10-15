@@ -1,415 +1,404 @@
 /* =====================================================================================
-   🌿 BASE GLOBALE
+   🌿 BASE GLOBALE (appliquée à toutes les pages)
 ===================================================================================== */
 body {
-  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #F0FFE6;
-  color: #2C3E2D;
-  margin: 0;
-  padding: 2rem;
-  line-height: 1.6;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F0FFE6;
+    color: #2C3E2D;
+    margin: 0;
+    padding: 2rem;
+    line-height: 1.6;
 }
 
-h1, h2, h3, h4 {
-  color: #1A4219;
+h1, h2, h3, h4, h5, h6 {
+    color: #1A4219;
+    letter-spacing: 1px;
+    font-weight: 700;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
+}
+
+section, header, footer {
+    background: rgb(0, 0, 0);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    padding: 1.5rem;
+    margin: 1.5rem auto;
+    width: 90%;
+    max-width: 1100px;
+    backdrop-filter: blur(4px);
 }
 
 /* =====================================================================================
-   ⚙️ STRUCTURE COMMUNE (utilisée dans show & edit)
+   ⚙️ HEADER & NAVIGATION
 ===================================================================================== */
-.projet-detail {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 2rem;
+header {
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
-.projet-columns {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 100%;
-  max-width: 1100px;
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
 }
 
-.bloc-left,
-.bloc-right {
-  background-color: #fff;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  flex: 1;
-  min-width: 300px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.main-nav a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #ffffff;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.main-nav a:hover {
+    color: #c0c0c0;
+    transform: translateY(-2px);
 }
 
 /* =====================================================================================
-   🗂️ SECTION 1 : PAGE INDEX (vue 2)
+   ⚙️ FOOTER & CONTACTS
 ===================================================================================== */
-.section-projets {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 2rem;
+footer {
+    color: white;
 }
 
-.section-projets h1 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
+.contact-list {
+    list-style: none;
+    padding: 0;
 }
 
-.projets-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  width: 100%;
-  max-width: 1200px;
+.contact-list li {
+    margin: 0.5rem 0;
+    font-size: 1rem;
 }
 
-.projet-card {
-  background-color: #fff;
-  border: 2px solid #dcdcdc;
-  border-radius: 12px;
-  padding: 1.2rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
+.contact-list a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
 }
 
-.projet-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-}
-
-.projet-card h3 {
-  margin: 0 0 0.5rem 0;
-  color: #1A4219;
-}
-
-.projet-card p {
-  flex: 1;
-  color: #333;
-  font-size: 0.95rem;
-}
-
-.projet-card .techno-list {
-  margin-top: 0.5rem;
-}
-
-.btn-primary {
-  display: inline-block;
-  background-color: #71b36b;
-  color: #fff;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
-  margin-top: 1rem;
-}
-
-.btn-primary:hover {
-  background-color: #5e9d57;
+.contact-list a:hover {
+    text-decoration: underline;
 }
 
 /* =====================================================================================
-   🔍 SECTION 2 : PAGE SHOW (vue 3)
+   ⚙️ BOUTONS GLOBAUX
 ===================================================================================== */
-.bloc-left h2,
-.bloc-right h2,
-.bloc-right h4 {
-  color: #000;
+button, .btn {
+    background: linear-gradient(135deg, #A3D900, #C1FF3C);
+    color: #2C3E2D;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Techno badges */
-.techno-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.techno-badge {
-  display: inline-block;
-  padding: 0.3em 0.6em;
-  margin: 0.2em;
-  border-radius: 4px;
-  background-color: #f0f8ff;
-  color: #202020;
-  font-size: 0.9rem;
-  transition: all 0.2s;
-}
-
-.techno-badge:hover {
-  background-color: #f3f3f3;
-  color: #000;
-  cursor: default;
-}
-
-/* Galerie d’images */
-.image-section-container {
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
-  padding: 1rem 0;
-  border-top: 1px solid #e5e7eb;
-  border-bottom: 1px solid #e5e7eb;
-  background: #3b3b3b;
-  border-radius: 12px;
-}
-
-.image-section {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 1rem;
-  width: max-content;
-  padding: 0 1rem;
-}
-
-.image-item {
-  flex: 0 0 auto;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  min-width: 220px;
-}
-
-.image-item img {
-  display: block;
-  height: 160px;
-  width: auto;
-  object-fit: cover;
-  border-radius: 12px;
-  transition: transform 0.3s ease;
-}
-
-.image-section-container::-webkit-scrollbar {
-  height: 8px;
-}
-.image-section-container::-webkit-scrollbar-thumb {
-  background: #c4c4c4;
-  border-radius: 4px;
-}
-.image-section-container::-webkit-scrollbar-thumb:hover {
-  background: #a3a3a3;
-}
-
-/* =====================================================================================
-   ✏️ SECTION 3 : PAGE EDIT (vue 4)
-===================================================================================== */
-
-/* Formulaires */
-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-label {
-  font-weight: bold;
-  color: #222;
-  margin-bottom: 0.3rem;
-}
-
-input[type="text"],
-select,
-textarea {
-  width: 100%;
-  padding: 0.6rem 0.8rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  font-size: 1rem;
-  color: #333;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-input[type="text"]:focus,
-select:focus,
-textarea:focus {
-  border-color: #71b36b;
-  box-shadow: 0 0 4px rgba(113, 179, 107, 0.5);
-  outline: none;
-}
-
-textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
-/* Technologies (sélection dynamique) */
-#techno-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.techno-btn {
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background-color: #f4f4f4;
-  color: #222;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.techno-btn:hover {
-  background-color: #e6e6e6;
-}
-
-.techno-btn.selected {
-  background-color: #b7f0b1;
-  border-color: #71b36b;
-  color: #1a4219;
-}
-
-/* Images existantes */
-.delete-image-label {
-  position: absolute;
-  bottom: 4px;
-  left: 4px;
-  background: rgba(255,255,255,0.8);
-  padding: 0.2rem 0.5rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  color: #222;
-}
-
-/* Étapes */
-.etape {
-  background-color: #f8f8f8;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 0.8rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.remove-etape {
-  align-self: flex-end;
-  background-color: #ffdddd;
-  border: 1px solid #d33;
-  color: #b30000;
-  border-radius: 6px;
-  padding: 0.3rem 0.6rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.remove-etape:hover {
-  background-color: #ffcccc;
-}
-
-#add-etape,
-#add-etape-dev {
-  background-color: #71b36b;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-#add-etape:hover,
-#add-etape-dev:hover {
-  background-color: #5e9d57;
-}
-
-/* Boutons */
-.btn-update {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-  align-self: flex-end;
-  transition: background-color 0.3s ease;
-}
-
-.btn-update:hover {
-  background-color: #45a049;
+button:hover, .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(163,217,0,0.3);
 }
 
 .btn-secondary {
-  background-color: #e0e0e0;
-  color: #222;
-  border-radius: 8px;
-  padding: 0.6rem 1.2rem;
-  text-decoration: none;
-  margin-bottom: 1rem;
-  transition: background-color 0.2s;
+    background-color: #e5e7eb;
+    color: #1f2937;
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.2s;
 }
 
-.btn-secondary:hover {
-  background-color: #d5d5d5;
+.btn-update {
+    background-color: #000;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-update:hover {
+    background-color: #494949;
 }
 
 .btn-danger {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-top: 1rem;
-  transition: background-color 0.3s;
+    background-color: #dc2626;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .btn-danger:hover {
-  background-color: #c0392b;
+    background-color: #b91c1c;
 }
 
 /* =====================================================================================
-   📱 RESPONSIVE GÉNÉRAL
+   🗂️ SECTION INDEX (vue 2)
 ===================================================================================== */
-@media (max-width: 1024px) {
-  .projet-columns {
+.section-projets {
+    display: flex;
     flex-direction: column;
     align-items: center;
-  }
+    margin-top: 2rem;
+}
 
-  .bloc-left,
-  .bloc-right {
+.projets-grid, .section-projets .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
     width: 100%;
-  }
+    max-width: 1200px;
+}
 
-  .projets-grid {
-    grid-template-columns: 1fr;
-  }
+.projet-card {
+    background-color: #fff;
+    border: 2px solid #dcdcdc;
+    border-radius: 12px;
+    padding: 1.2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.projet-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.projet-card h3 {
+    margin: 0 0 0.5rem 0;
+    color: #1A4219;
+}
+
+.projet-card p {
+    flex: 1;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.projet-card .techno-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+/* =====================================================================================
+   🔍 SECTION SHOW (vue 3)
+===================================================================================== */
+.projet-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.projet-columns {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1100px;
+}
+
+.bloc-left, .bloc-right {
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.techno-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.techno-badge {
+    display: inline-block;
+    padding: 0.3em 0.6em;
+    margin: 0.2em;
+    border-radius: 4px;
+    background-color: #f0f8ff;
+    color: #202020;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.techno-badge:hover {
+    background-color: #f3f3f3;
+    color: #000;
+    cursor: default;
+}
+
+.image-section-container {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    padding: 1rem 0;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    background: #3b3b3b;
+    border-radius: 12px;
+}
+
+.image-section {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    width: max-content;
+    padding: 0 1rem;
+}
+
+.image-item {
+    flex: 0 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    min-width: 220px;
+}
+
+.image-item img {
+    display: block;
+    height: 160px;
+    width: auto;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* =====================================================================================
+   ✏️ SECTION EDIT (vue 4)
+===================================================================================== */
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+label {
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 0.3rem;
+}
+
+input[type="text"], select, textarea {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 1rem;
+    color: #333;
+}
+
+input[type="text"]:focus, select:focus, textarea:focus {
+    border-color: #71b36b;
+    box-shadow: 0 0 4px rgba(113, 179, 107, 0.5);
+    outline: none;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+#techno-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.techno-btn {
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #f4f4f4;
+    color: #222;
+    cursor: pointer;
+}
+
+.techno-btn.selected {
+    background-color: #b7f0b1;
+    border-color: #71b36b;
+    color: #1a4219;
+}
+
+.etape {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.remove-etape {
+    align-self: flex-end;
+    background-color: #ffdddd;
+    border: 1px solid #d33;
+    color: #b30000;
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+}
+
+.remove-etape:hover {
+    background-color: #ffcccc;
+}
+
+/* =====================================================================================
+   📱 RESPONSIVE
+===================================================================================== */
+@media (max-width: 1024px) {
+    .projet-columns {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bloc-left, .bloc-right {
+        width: 100%;
+        max-width: 100%;
+        padding: 1rem;
+    }
 }
 
 @media (max-width: 640px) {
-  .image-item {
-    min-width: 140px;
-  }
+    .image-item {
+        min-width: 140px;
+    }
 
-  .image-item img {
-    height: 100px;
-  }
+    .image-item img {
+        height: 100px;
+    }
 
-  .btn-update,
-  .btn-danger {
-    width: 100%;
-  }
+    .btn-update, .btn-danger {
+        width: 100%;
+    }
 }

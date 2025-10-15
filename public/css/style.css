@@ -350,7 +350,6 @@ button:hover, .btn:hover {
 .container {
     gap: 1.5rem;
     justify-content: center;
-    display: flex;
 }
 
 /* === BARRE DE FILTRES === */

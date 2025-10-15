@@ -532,16 +532,6 @@ button:hover, .btn:hover {
     gap: 1rem;
   }
 
-  /* .section-bienvenue {
-    height: auto;
-    padding: 2rem 1rem;
-    font-size: 1rem;
-  }
-
-  .section-bienvenue h4 {
-    font-size: 1.4rem;
-  } */
-
   .section-projets .container {
     flex-direction: column;
     gap: 1rem;

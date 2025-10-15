@@ -6,7 +6,7 @@
 <script src="{{ asset('js/techno.js') }}"></script>
 
 <div class="projet-detail">
-    <div class="projet-columns">
+    <div class="section-projets">projet-column
 
         <!-- Bloc gauche : infos principales + images -->
         <div class="bloc-left">

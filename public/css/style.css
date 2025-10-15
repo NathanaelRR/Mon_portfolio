@@ -293,6 +293,16 @@ button:hover, .btn:hover {
     padding: 1rem;
   }
 
+  .section-presentation{
+    width: 95%;
+    padding: 1rem;
+  }
+
+  .section-profil {
+    width: 95%;
+    padding: 1rem;
+  }
+
   .main-nav ul {
     flex-direction: column;
     gap: 1rem;
@@ -309,8 +319,10 @@ button:hover, .btn:hover {
   }
 
   .bloc-left, .bloc-right {
-    max-width: 100%;
+    /* max-width: 100%;
     width: 100%;
+    padding: 1rem; */
+    width: 95%;
     padding: 1rem;
   }
 

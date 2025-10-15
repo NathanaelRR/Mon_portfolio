@@ -410,6 +410,7 @@ button:hover, .btn:hover {
     text-overflow: ellipsis;
     white-space: normal;
     min-height: 3.6em;
+    color: white;
 }
 
 .projet-card .techno-list {

@@ -3,7 +3,7 @@
 @section('content')
     <script src="{{ asset('js/filtre.js') }}"></script>
 
-    <section id="presentation" class="section-presentation">
+    <section id="presentation" class="section-projets">
             <h2>Hey, je suis Nathanaël Rasoamanana.</h2>
             <p>Étudiant en <strong>Master MIASHS - Informatique et Cognition </strong> à l'Université de Grenoble Alpes.</p>
             <p>Je développe une expertise principalement orientée vers le <strong>développement informatique et web</strong>, tout en gardant une ouverture vers les <strong>sciences cognitives et comportementales.</strong></p>
@@ -13,7 +13,7 @@
         <h4> BIENVENUE SUR MON PETIT PORTFOLIO </h4>
     </section>
 
-    <section id="profil" class="section-projets">//profil
+    <section id="profil" class="section-projets">
 
             <div class="col" id="div1">
                 <h3>Engagements & Bénévolats</h3>

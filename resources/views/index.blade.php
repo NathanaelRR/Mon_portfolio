@@ -13,7 +13,7 @@
         <h4> BIENVENUE SUR MON PETIT PORTFOLIO </h4>
     </section>
 
-    <section id="profil" class="section-profil">
+    <section id="profil" class="section-projets">
 
             <div class="col" id="div1">
                 <h3>Engagements & Bénévolats</h3>

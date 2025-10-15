@@ -350,6 +350,7 @@ button:hover, .btn:hover {
 .container {
     gap: 1.5rem;
     justify-content: center;
+    display: flex;
 }
 
 /* === BARRE DE FILTRES === */
@@ -661,9 +662,6 @@ button:hover, .btn:hover {
   .section-presentation {
     margin: 2rem 1rem;
     padding: 1.5rem;
-    height: auto;
-    /* padding: 2rem 1rem;
-    font-size: 1rem; */
   }
 
   .section-presentation h2 {

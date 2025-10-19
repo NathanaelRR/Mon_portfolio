@@ -6,9 +6,10 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     libsqlite3-dev \
+    libpq-dev \           # nécessaire pour PostgreSQL
     nodejs \
     npm \
-    && docker-php-ext-install pdo pdo_sqlite
+    && docker-php-ext-install pdo pdo_sqlite pdo_pgsql pgsql
 
 # Installer Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer

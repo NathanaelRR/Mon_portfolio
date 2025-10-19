@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="/projets/2">Test projet 2</a>
-
     <script src="{{ asset('js/filtre.js') }}"></script>
 
     <section id="presentation" class="section-projets">

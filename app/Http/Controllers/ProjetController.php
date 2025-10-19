@@ -165,48 +165,18 @@ class ProjetController extends Controller
         }
     }
 
-    // private function storeImages(Projet $projet, Request $request)
-    // {
-    //     if ($request->hasFile('images')) {
-    //         foreach ($request->file('images') as $index => $file) {
-    //             $path = $file->store('projets', 'public');
-    //             $projet->images()->create([
-    //                 'path' => $path,
-    //                 'ordre' => $index,
-    //             ]);
-    //         }
-    //     }
-    // }
-
     private function storeImages(Projet $projet, Request $request)
-{
-    if ($request->hasFile('images')) {
-        foreach ($request->file('images') as $index => $file) {
-
-            // 🕒 Nom unique pour éviter les collisions
-            $filename = time() . '_' . $file->getClientOriginalName();
-
-            // 🧩 1️⃣ — Enregistre d’abord via le système Laravel (storage/app/public/projets)
-            $path = $file->storeAs('projets', $filename, 'public');
-
-            // 🧩 2️⃣ — Copie (ou déplace) aussi dans public/projets pour un accès direct (si souhaité)
-            $destination = public_path('projets');
-            if (!file_exists($destination)) {
-                mkdir($destination, 0777, true);
-            }
-            $file->move($destination, $filename);
-
-            // ✅ 3️⃣ — Vérifie que le fichier existe bien et enregistre dans la BDD
-            if (file_exists($destination . '/' . $filename)) {
+    {
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $index => $file) {
+                $path = $file->store('projets', 'public');
                 $projet->images()->create([
-                    'path' => 'projets/' . $filename, // accessible via le dossier public
+                    'path' => $path,
                     'ordre' => $index,
                 ]);
             }
         }
     }
-}
-
 
      private function deleteImages(Projet $projet, Request $request)
     {

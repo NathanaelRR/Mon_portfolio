@@ -165,26 +165,11 @@ class ProjetController extends Controller
         }
     }
 
-    // private function storeImages(Projet $projet, Request $request)
-    // {
-    //     if ($request->hasFile('images')) {
-    //         foreach ($request->file('images') as $index => $file) {
-    //             $path = $file->store('projets', 'public');
-    //             $projet->images()->create([
-    //                 'path' => $path,
-    //                 'ordre' => $index,
-    //             ]);
-    //         }
-    //     }
-    // }
-
     private function storeImages(Projet $projet, Request $request)
     {
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $index => $file) {
-                // Upload sur S3 au lieu de public
-                $path = $file->store('projets', 's3');
-
+                $path = $file->store('projets', 'public');
                 $projet->images()->create([
                     'path' => $path,
                     'ordre' => $index,
@@ -193,33 +178,20 @@ class ProjetController extends Controller
         }
     }
 
-
-    //  private function deleteImages(Projet $projet, Request $request)
-    // {
-    //     if (!empty($request->delete_images)) {
-    //         foreach ($request->delete_images as $imageId) {
-    //             $image = $projet->images()->find($imageId);
-    //             if ($image) {
-    //                 Storage::disk('public')->delete($image->path);
-    //                 $image->delete();
-    //             }
-    //         }
-    //     }
-    // }
-
-    private function deleteImages(Projet $projet, Request $request)
+     private function deleteImages(Projet $projet, Request $request)
     {
         if (!empty($request->delete_images)) {
             foreach ($request->delete_images as $imageId) {
                 $image = $projet->images()->find($imageId);
                 if ($image) {
-                    // Supprimer depuis S3
-                    Storage::disk('s3')->delete($image->path);
+                    Storage::disk('public')->delete($image->path);
                     $image->delete();
                 }
             }
         }
     }
+
+
 
     private function deleteEtapes(Projet $projet, Request $request)
     {

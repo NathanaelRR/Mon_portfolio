@@ -179,16 +179,22 @@ class ProjetController extends Controller
     // }
 
     private function storeImages(Projet $projet, Request $request)
-    {
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $index => $file) {
-                // Crée un nom unique pour éviter les collisions
-                $filename = time() . '_' . $file->getClientOriginalName();
+{
+    if ($request->hasFile('images')) {
+        foreach ($request->file('images') as $index => $file) {
+            $filename = time() . '_' . $file->getClientOriginalName();
 
-                // Déplace l'image dans public/projets
-                $file->move(public_path('projets'), $filename);
+            // Crée le dossier public/projets si inexistant
+            $destination = public_path('projets');
+            if (!file_exists($destination)) {
+                mkdir($destination, 0777, true);
+            }
 
-                // Enregistre le chemin relatif dans la BDD
+            // Déplace le fichier
+            $file->move($destination, $filename);
+
+            // Vérifie que le fichier a bien été déplacé
+            if (file_exists($destination . '/' . $filename)) {
                 $projet->images()->create([
                     'path' => 'projets/' . $filename,
                     'ordre' => $index,
@@ -196,6 +202,8 @@ class ProjetController extends Controller
             }
         }
     }
+}
+
 
 
      private function deleteImages(Projet $projet, Request $request)

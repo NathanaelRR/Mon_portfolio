@@ -5,12 +5,22 @@ use App\Http\Controllers\ProjetController;
 
 Route::get('/', [ProjetController::class, 'index'])->name('index');
 
-Route::resource('projets', ProjetController::class);
+// Route::resource('projets', ProjetController::class);
+
+// Route::prefix('projets/bo_nthnl_76')->name('projets.')->group(function() {
+//     Route::get('create', [ProjetController::class, 'create'])->name('create');
+//     Route::post('/', [ProjetController::class, 'store'])->name('store');
+//     Route::get('{projet}/edit', [ProjetController::class, 'edit'])->name('edit');
+//     Route::put('{projet}', [ProjetController::class, 'update'])->name('update');
+//     Route::delete('{projet}', [ProjetController::class, 'destroy'])->name('destroy');
+// });
 
 Route::prefix('projets/bo_nthnl_76')->name('projets.')->group(function() {
+    Route::get('/', [ProjetController::class, 'index'])->name('index');
     Route::get('create', [ProjetController::class, 'create'])->name('create');
     Route::post('/', [ProjetController::class, 'store'])->name('store');
     Route::get('{projet}/edit', [ProjetController::class, 'edit'])->name('edit');
     Route::put('{projet}', [ProjetController::class, 'update'])->name('update');
     Route::delete('{projet}', [ProjetController::class, 'destroy'])->name('destroy');
 });
+

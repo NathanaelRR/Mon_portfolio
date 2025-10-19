@@ -28,7 +28,22 @@
                         </select>
 
                         @php
-                            $technoList = ['PHP', 'Laravel', 'JavaScript', 'Vue.js', 'React', 'HTML', 'CSS', 'Python', 'MySQL', 'Docker'];
+                            $technoList = [
+                                // Langages
+                                'PHP', 'JavaScript', 'Python', 'Java', 'C#', 'Ruby', 'TypeScript', 'Swift', 'Kotlin', 'Pascal', 'R',
+
+                                // Front-end
+                                'HTML', 'CSS', 'Bootstrap', 'Tailwind CSS', 'Vue.js', 'React', 'Angular', 'jQuery',
+
+                                // Back-end / Frameworks
+                                'Laravel', 'Symfony', 'Django', 'Flask', 'Express.js', 'Spring', 'Ruby on Rails', 'ASP.NET',
+
+                                // Bases de données
+                                'MySQL', 'PostgreSQL', 'MongoDB', 'SQLite', 'MariaDB', 'Access',
+
+                                // Mobile
+                                'React Native', 'Flutter', 'Swift', 'Kotlin'
+                            ];
 
                             $selected = is_array($projet->technologies) // Technologies déjà sélectionnées pour ce projet
                                 ? $projet->technologies

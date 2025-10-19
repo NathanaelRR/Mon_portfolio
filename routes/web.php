@@ -5,7 +5,7 @@ use App\Http\Controllers\ProjetController;
 
 // Route::get('/', [ProjetController::class, 'index'])->name('index');
 
-// // Route::resource('projets', ProjetController::class);
+ Route::resource('projets', ProjetController::class);
 
 // Route::prefix('projets/bo_nthnl_76')->name('projets.')->group(function() {
 //     Route::get('create', [ProjetController::class, 'create'])->name('create');

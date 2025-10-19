@@ -18,8 +18,8 @@
                     <div class="image-section" id="imageCarousel">
                         @foreach($projet->images as $image)
                             <figure class="image-item">
-                                {{-- <img src="{{ asset('storage/' . $image->path) }}" alt="Image du projet"> --}}
-                                <img src="{{ asset('storage/projets/' . $image->path) }}" alt="Image du projet">
+                                <img src="{{ asset('storage/' . $image->path) }}" alt="Image du projet">
+                                {{-- <img src="{{ asset('storage/projets/' . $image->path) }}" alt="Image du projet"> --}}
                             </figure>
                         @endforeach
                     </div>

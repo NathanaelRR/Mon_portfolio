@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<a href="/projets/2">Test projet 2</a>
+
     <script src="{{ asset('js/filtre.js') }}"></script>
 
     <section id="presentation" class="section-projets">
@@ -82,7 +84,9 @@
                         </div>
                     @endif
 
-                    <a href="{{ route('projets.show', $projet) }}">Voir</a>
+                    {{-- <a href="{{ route('projets.show', $projet) }}">Voir</a> --}}
+                    <a href="{{ route('projets.show', ['projet' => $projet->id]) }}">Voir</a>
+
                 </div>
             @endforeach
         </div>

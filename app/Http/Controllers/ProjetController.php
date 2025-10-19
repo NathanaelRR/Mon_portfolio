@@ -179,32 +179,30 @@ class ProjetController extends Controller
     // }
 
     private function storeImages(Projet $projet, Request $request)
-{
-    if ($request->hasFile('images')) {
-        foreach ($request->file('images') as $index => $file) {
-            $filename = time() . '_' . $file->getClientOriginalName();
+    {
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $index => $file) {
+                $filename = time() . '_' . $file->getClientOriginalName();
 
-            // Crée le dossier public/projets si inexistant
-            $destination = public_path('projets');
-            if (!file_exists($destination)) {
-                mkdir($destination, 0777, true);
-            }
+                // Crée le dossier public/projets si inexistant
+                $destination = public_path('projets');
+                if (!file_exists($destination)) {
+                    mkdir($destination, 0777, true);
+                }
 
-            // Déplace le fichier
-            $file->move($destination, $filename);
+                // Déplace le fichier
+                $file->move($destination, $filename);
 
-            // Vérifie que le fichier a bien été déplacé
-            if (file_exists($destination . '/' . $filename)) {
-                $projet->images()->create([
-                    'path' => 'projets/' . $filename,
-                    'ordre' => $index,
-                ]);
+                // Vérifie que le fichier a bien été déplacé
+                if (file_exists($destination . '/' . $filename)) {
+                    $projet->images()->create([
+                        'path' => 'projets/' . $filename,
+                        'ordre' => $index,
+                    ]);
+                }
             }
         }
     }
-}
-
-
 
      private function deleteImages(Projet $projet, Request $request)
     {
@@ -218,8 +216,6 @@ class ProjetController extends Controller
             }
         }
     }
-
-
 
     private function deleteEtapes(Projet $projet, Request $request)
     {

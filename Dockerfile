@@ -35,4 +35,6 @@ RUN php artisan storage:link
 EXPOSE 10000
 
 # Démarrer le serveur PHP intégré sur le dossier public
-CMD ["php", "-S", "0.0.0.0:10000", "-t", "public"]
+# CMD ["php", "-S", "0.0.0.0:10000", "-t", "public"]
+EXPOSE $PORT
+CMD ["php", "-S", "0.0.0.0:$PORT", "-t", "public"]

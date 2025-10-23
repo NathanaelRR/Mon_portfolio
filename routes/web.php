@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjetController;
+use Illuminate\Support\Facades\DB; // <--- IMPORTANT
+
 
 // Route::get('/', [ProjetController::class, 'index'])->name('index');
 
@@ -25,4 +27,8 @@ Route::prefix('projets/bo_nthnl_76')->name('projets.admin.')->group(function() {
     Route::get('{projet}/edit', [ProjetController::class, 'edit'])->name('edit');
     Route::put('{projet}', [ProjetController::class, 'update'])->name('update');
     Route::delete('{projet}', [ProjetController::class, 'destroy'])->name('destroy');
+});
+
+Route::get('/test-db', function() {
+    return DB::connection()->getDatabaseName();
 });

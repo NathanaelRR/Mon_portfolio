@@ -10,12 +10,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ProjetController extends Controller
 {
-
     public function index()
     {
         $projets = Projet::all();
 
-        // Extraire les technologies uniques
         $technoList = $projets
             ->pluck('technologies')
             ->flatten()
@@ -26,17 +24,11 @@ class ProjetController extends Controller
         return view('index', compact('projets', 'technoList'));
     }
 
-    // -----------------------------
-    // Formulaire de création
-    // -----------------------------
     public function create()
     {
         return view('projets.bo_nthnl_76.create');
     }
 
-    // -----------------------------
-    // Stocke un nouveau projet
-    // -----------------------------
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -54,7 +46,6 @@ class ProjetController extends Controller
             'images.*' => 'nullable|image|max:2048',
         ]);
 
-        // Créer le projet
         $projet = Projet::create([
             'nom' => $data['nom'],
             'type' => $data['type'],
@@ -64,34 +55,22 @@ class ProjetController extends Controller
             'technologies' => $data['technologies'] ?? [],
         ]);
 
-        // Ajouter les étapes
         $this->storeEtapes($projet, $data['etapes'] ?? []);
-
-        // Ajouter les images
         $this->storeImages($projet, $request);
 
         return redirect()->route('index')->with('success', 'Projet créé !');
     }
 
-    // -----------------------------
-    // Afficher un projet
-    // -----------------------------
     public function show(Projet $projet)
     {
         return view('projets.show', compact('projet'));
     }
 
-    // -----------------------------
-    // Formulaire d'édition
-    // -----------------------------
     public function edit(Projet $projet)
     {
         return view('projets.bo_nthnl_76.edit', compact('projet'));
     }
 
-    // -----------------------------
-    // Mettre à jour un projet
-    // -----------------------------
     public function update(Request $request, Projet $projet)
     {
         $data = $request->validate([
@@ -112,7 +91,6 @@ class ProjetController extends Controller
             'delete_images' => 'nullable|array',
         ]);
 
-        // Mettre à jour le projet
         $projet->update([
             'nom' => $data['nom'],
             'type' => $data['type'],
@@ -122,45 +100,26 @@ class ProjetController extends Controller
             'technologies' => $data['technologies'] ?? [],
         ]);
 
-        // Supprimer les étapes sélectionnées
         $this->deleteEtapes($projet, $request);
-
-        // Mettre à jour ou ajouter les étapes
         $this->updateEtapes($projet, $data['etapes'] ?? []);
-
-        // Supprimer les images sélectionnées
         $this->deleteImages($projet, $request);
-
-        // Ajouter les nouvelles images
         $this->storeImages($projet, $request);
 
         return redirect()->route('projets.show', $projet)->with('success', 'Projet mis à jour !');
     }
 
-    // -----------------------------
-    // Fonctions auxiliaires
-    // -----------------------------
     private function storeEtapes(Projet $projet, array $etapes)
     {
-        if (!empty($etapes['conception'])) {
-            foreach ($etapes['conception'] as $index => $etape) {
-                $projet->etapes()->create([
-                    'categorie' => 'conception',
-                    'titre' => $etape['titre'],
-                    'description' => $etape['description'] ?? null,
-                    'ordre' => $index,
-                ]);
-            }
-        }
-
-        if (!empty($etapes['developpement'])) {
-            foreach ($etapes['developpement'] as $index => $etape) {
-                $projet->etapes()->create([
-                    'categorie' => 'developpement',
-                    'titre' => $etape['titre'],
-                    'description' => $etape['description'] ?? null,
-                    'ordre' => $index,
-                ]);
+        foreach (['conception', 'developpement'] as $categorie) {
+            if (!empty($etapes[$categorie])) {
+                foreach ($etapes[$categorie] as $index => $etape) {
+                    $projet->etapes()->create([
+                        'categorie' => $categorie,
+                        'titre' => $etape['titre'],
+                        'description' => $etape['description'] ?? null,
+                        'ordre' => $index,
+                    ]);
+                }
             }
         }
     }
@@ -168,9 +127,12 @@ class ProjetController extends Controller
     private function storeImages(Projet $projet, Request $request)
     {
         if ($request->hasFile('images')) {
+            // 🔁 Utilise automatiquement le bon disque selon .env
+            $disk = config('filesystems.default');
+
             foreach ($request->file('images') as $index => $file) {
-                // $path = $file->store('projets', 'public');
-                $path = $file->store('projets', 'persistent');
+                $path = $file->store('projets', $disk);
+
                 $projet->images()->create([
                     'path' => $path,
                     'ordre' => $index,
@@ -179,55 +141,15 @@ class ProjetController extends Controller
         }
     }
 
-    // public function serveImage($path)
-    // {
-    //     $disk = Storage::disk('persistent');
-
-    //     if (!$disk->exists($path)) {
-    //         abort(404);
-    //     }
-
-    //     $file = $disk->get($path);
-
-    //     // Déterminer le mime type de manière sûre
-    //     $mime = $disk->mimeType($path) ?? 'application/octet-stream';
-
-    //     return response($file, 200)
-    //         ->header('Content-Type', $mime);
-    // }
-
-    public function serveImage($path)
-    {
-        $disk = Storage::disk('persistent');
-
-        if (!$disk->exists($path)) {
-            abort(404);
-        }
-
-        $file = $disk->get($path);
-
-        // Détermination du type MIME à partir de l'extension
-        $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
-        $mime = match($extension) {
-            'jpg', 'jpeg' => 'image/jpeg',
-            'png' => 'image/png',
-            'gif' => 'image/gif',
-            'webp' => 'image/webp',
-            'svg' => 'image/svg+xml',
-            default => 'application/octet-stream',
-        };
-
-        return response($file, 200)
-            ->header('Content-Type', $mime);
-    }
-
-     private function deleteImages(Projet $projet, Request $request)
+    private function deleteImages(Projet $projet, Request $request)
     {
         if (!empty($request->delete_images)) {
+            $disk = config('filesystems.default');
+
             foreach ($request->delete_images as $imageId) {
                 $image = $projet->images()->find($imageId);
                 if ($image) {
-                    Storage::disk('public')->delete($image->path);
+                    Storage::disk($disk)->delete($image->path);
                     $image->delete();
                 }
             }
@@ -269,21 +191,16 @@ class ProjetController extends Controller
         }
     }
 
-    // -----------------------------
-    // Supprimer un projet
-    // -----------------------------
     public function destroy(Projet $projet)
     {
-        // Supprimer les images physiques
+        $disk = config('filesystems.default');
+
         foreach ($projet->images as $image) {
-            Storage::disk('public')->delete($image->path);
+            Storage::disk($disk)->delete($image->path);
         }
 
-        // Supprimer toutes les étapes et images en base
         $projet->etapes()->delete();
         $projet->images()->delete();
-
-        // Supprimer le projet
         $projet->delete();
 
         return redirect()->route('index')->with('success', 'Projet supprimé avec succès !');

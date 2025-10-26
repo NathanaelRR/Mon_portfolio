@@ -76,8 +76,8 @@
                                 <div class="image-section" id="imageCarousel">
                                     @foreach($projet->images as $image)
                                         <figure class="image-item">
-                                            <img src="{{ asset('storage/' . $image->path) }}" alt="Image du projet">
-                                            {{-- <img src="{{ Storage::disk('s3')->url($image->path) }}" alt="Image du projet"> --}}
+                                            {{-- <img src="{{ asset('storage/' . $image->path) }}" alt="Image du projet"> --}}
+                                            <img src="{{ Storage::disk('s3')->url($image->path) }}" alt="Image du projet">
                                             <!-- Checkbox pour suppression -->
                                             <label class="delete-image-label">
                                                 <input type="checkbox" name="delete_images[]" value="{{ $image->id }}">

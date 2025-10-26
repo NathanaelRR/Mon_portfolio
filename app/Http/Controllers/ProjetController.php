@@ -179,6 +179,23 @@ class ProjetController extends Controller
         }
     }
 
+    // public function serveImage($path)
+    // {
+    //     $disk = Storage::disk('persistent');
+
+    //     if (!$disk->exists($path)) {
+    //         abort(404);
+    //     }
+
+    //     $file = $disk->get($path);
+
+    //     // Déterminer le mime type de manière sûre
+    //     $mime = $disk->mimeType($path) ?? 'application/octet-stream';
+
+    //     return response($file, 200)
+    //         ->header('Content-Type', $mime);
+    // }
+
     public function serveImage($path)
     {
         $disk = Storage::disk('persistent');
@@ -189,13 +206,20 @@ class ProjetController extends Controller
 
         $file = $disk->get($path);
 
-        // Déterminer le mime type de manière sûre
-        $mime = $disk->mimeType($path) ?? 'application/octet-stream';
+        // Détermination du type MIME à partir de l'extension
+        $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+        $mime = match($extension) {
+            'jpg', 'jpeg' => 'image/jpeg',
+            'png' => 'image/png',
+            'gif' => 'image/gif',
+            'webp' => 'image/webp',
+            'svg' => 'image/svg+xml',
+            default => 'application/octet-stream',
+        };
 
         return response($file, 200)
             ->header('Content-Type', $mime);
     }
-
 
      private function deleteImages(Projet $projet, Request $request)
     {

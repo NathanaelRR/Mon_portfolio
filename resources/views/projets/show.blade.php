@@ -53,7 +53,7 @@
                 </div>
             @endif --}}
 
-            <img src="{{ Storage::disk('persistent')->url("projets/xX19p6hCBjILqC4lKal0s7CxeburAGAPDx48W6U4.jpg") }}" alt="Image">
+            {{-- <img src="{{ Storage::disk('persistent')->url("projets/xX19p6hCBjILqC4lKal0s7CxeburAGAPDx48W6U4.jpg") }}" alt="Image"> --}}
 
 
             @if($projet->images->count())
@@ -61,7 +61,8 @@
                     <div class="image-section" id="imageCarousel">
                         @foreach($projet->images as $image)
                             <figure class="image-item">
-                                <img src="{{ Storage::disk(config('filesystems.default'))->url($image->path) }}" alt="Image du projet">
+                                {{-- <img src="{{ Storage::disk(config('filesystems.default'))->url($image->path) }}" alt="Image du projet"> --}}
+                                <img src="{{ Storage::disk('s3')->url($image->path) }}" alt="Image du projet">
                             </figure>
                         @endforeach
                     </div>

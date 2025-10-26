@@ -169,7 +169,8 @@ class ProjetController extends Controller
     {
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $index => $file) {
-                $path = $file->store('projets', 'public');
+                // $path = $file->store('projets', 'public');
+                $path = $file->store('projets', 'persistent');
                 $projet->images()->create([
                     'path' => $path,
                     'ordre' => $index,

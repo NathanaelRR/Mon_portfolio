@@ -13,16 +13,28 @@
             <h2>{{ $projet->nom }}</h2>
             <p><strong>Projet :</strong> {{ $projet->type }}</p>
 
+            {{-- @if($projet->images->count())
+                <div class="image-section-container">
+                    <div class="image-section" id="imageCarousel">
+                        @foreach($projet->images as $image)
+                            <figure class="image-item"> --}}
+                                {{-- <img src="{{ asset('storage/' . $image->path) }}" alt="Image du projet"> --}}
+                                {{-- <img src="{{ asset('storage/projets/' . $image->path) }}" alt="Image du projet"> --}}
+                                {{-- <img src="{{ Storage::disk('s3')->url($image->path) }}" alt="Image du projet"> --}}
+                                {{-- <img src="{{ asset($image->path) }}" alt="Image du projet"> --}}
+                                {{-- <img src="{{ Storage::disk('persistent')->url($image->path) }}" alt="Image du projet">
+                            </figure>
+                        @endforeach
+                    </div>
+                </div>
+            @endif --}}
+
             @if($projet->images->count())
                 <div class="image-section-container">
                     <div class="image-section" id="imageCarousel">
                         @foreach($projet->images as $image)
                             <figure class="image-item">
-                                {{-- <img src="{{ asset('storage/' . $image->path) }}" alt="Image du projet"> --}}
-                                {{-- <img src="{{ asset('storage/projets/' . $image->path) }}" alt="Image du projet"> --}}
-                                {{-- <img src="{{ Storage::disk('s3')->url($image->path) }}" alt="Image du projet"> --}}
-                                {{-- <img src="{{ asset($image->path) }}" alt="Image du projet"> --}}
-                                <img src="{{ Storage::disk('persistent')->url($image->path) }}" alt="Image du projet">
+                                <img src="{{ route('images.serve', $image->path) }}" alt="Image du projet">
                             </figure>
                         @endforeach
                     </div>

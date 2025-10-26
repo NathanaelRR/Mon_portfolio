@@ -179,6 +179,24 @@ class ProjetController extends Controller
         }
     }
 
+    public function serveImage($path)
+    {
+        $disk = Storage::disk('persistent');
+
+        if (!$disk->exists($path)) {
+            abort(404);
+        }
+
+        $file = $disk->get($path);
+
+        // Déterminer le mime type de manière sûre
+        $mime = $disk->mimeType($path) ?? 'application/octet-stream';
+
+        return response($file, 200)
+            ->header('Content-Type', $mime);
+    }
+
+
      private function deleteImages(Projet $projet, Request $request)
     {
         if (!empty($request->delete_images)) {

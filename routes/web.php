@@ -32,3 +32,7 @@ Route::prefix('projets/bo_nthnl_76')->name('projets.admin.')->group(function() {
 Route::get('/test-db', function() {
     return DB::connection()->getDatabaseName();
 });
+
+Route::get('/images/{path}', [ProjetController::class, 'serveImage'])
+    ->where('path', '.*')
+    ->name('images.serve');

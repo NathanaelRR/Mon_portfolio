@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 Route::get('/debug-files', function() {
     $files = Storage::disk('persistent')->allFiles('projets');
-    dd($files);
+    return response()->json($files);
 });
 
 // Route::get('/', [ProjetController::class, 'index'])->name('index');

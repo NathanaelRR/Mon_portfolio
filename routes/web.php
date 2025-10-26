@@ -2,8 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjetController;
-use Illuminate\Support\Facades\DB; // <--- IMPORTANT
+// use Illuminate\Support\Facades\DB; // <--- IMPORTANT
+use Illuminate\Support\Facades\Storage;
 
+
+Route::get('/debug-files', function() {
+    $files = Storage::disk('persistent')->allFiles('projets');
+    dd($files);
+});
 
 // Route::get('/', [ProjetController::class, 'index'])->name('index');
 

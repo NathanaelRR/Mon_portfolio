@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB; // <--- IMPORTANT
 // Route::get('/', [ProjetController::class, 'index'])->name('index');
 
  Route::resource('projets', ProjetController::class);
- 
+
 // Front routes
 Route::get('/', [ProjetController::class, 'index'])->name('index');
 Route::get('projets/{projet}', [ProjetController::class, 'show'])->name('projets.show');
@@ -19,10 +19,6 @@ Route::prefix('projets/bo_nthnl_76')->name('projets.admin.')->group(function() {
     Route::get('{projet}/edit', [ProjetController::class, 'edit'])->name('edit');
     Route::put('{projet}', [ProjetController::class, 'update'])->name('update');
     Route::delete('{projet}', [ProjetController::class, 'destroy'])->name('destroy');
-});
-
-Route::get('/test-db', function() {
-    return DB::connection()->getDatabaseName();
 });
 
 Route::get('/images/{path}', [ProjetController::class, 'serveImage'])

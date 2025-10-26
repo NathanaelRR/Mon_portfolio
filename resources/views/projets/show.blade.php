@@ -29,6 +29,18 @@
                 </div>
             @endif --}}
 
+            {{-- @if($projet->images->count())
+                <div class="image-section-container">
+                    <div class="image-section" id="imageCarousel">
+                        @foreach($projet->images as $image)
+                            <figure class="image-item">
+                                <img src="{{ route('images.serve', $image->path) }}" alt="Image du projet">
+                            </figure>
+                        @endforeach
+                    </div>
+                </div>
+            @endif --}}
+
             @if($projet->images->count())
                 <div class="image-section-container">
                     <div class="image-section" id="imageCarousel">

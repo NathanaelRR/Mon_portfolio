@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Projet;
-use App\Models\Etape;
-use App\Models\ProjetImage;
 use Illuminate\Support\Facades\Storage;
 
 class ProjetController extends Controller
@@ -127,11 +125,8 @@ class ProjetController extends Controller
     private function storeImages(Projet $projet, Request $request)
     {
         if ($request->hasFile('images')) {
-            // 🔁 Utilise automatiquement le bon disque selon .env
-            $disk = config('filesystems.default');
-
             foreach ($request->file('images') as $index => $file) {
-                $path = $file->store('projets', $disk);
+                $path = $file->store('projets', 's3');
 
                 $projet->images()->create([
                     'path' => $path,
@@ -144,12 +139,10 @@ class ProjetController extends Controller
     private function deleteImages(Projet $projet, Request $request)
     {
         if (!empty($request->delete_images)) {
-            $disk = config('filesystems.default');
-
             foreach ($request->delete_images as $imageId) {
                 $image = $projet->images()->find($imageId);
                 if ($image) {
-                    Storage::disk($disk)->delete($image->path);
+                    Storage::disk('s3')->delete($image->path);
                     $image->delete();
                 }
             }
@@ -193,10 +186,8 @@ class ProjetController extends Controller
 
     public function destroy(Projet $projet)
     {
-        $disk = config('filesystems.default');
-
         foreach ($projet->images as $image) {
-            Storage::disk($disk)->delete($image->path);
+            Storage::disk('s3')->delete($image->path);
         }
 
         $projet->etapes()->delete();

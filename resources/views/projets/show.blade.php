@@ -53,6 +53,9 @@
                 </div>
             @endif --}}
 
+            <img src="{{ Storage::disk('persistent')->url("projets/xX19p6hCBjILqC4lKal0s7CxeburAGAPDx48W6U4.jpg") }}" alt="Image">
+
+
             @if($projet->images->count())
                 <div class="image-section-container">
                     <div class="image-section" id="imageCarousel">

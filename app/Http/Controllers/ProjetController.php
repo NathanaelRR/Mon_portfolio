@@ -122,40 +122,6 @@ class ProjetController extends Controller
         }
     }
 
-    // private function storeImages(Projet $projet, Request $request)
-    // {
-    //     if ($request->hasFile('images')) {
-    //         foreach ($request->file('images') as $index => $file) {
-    //             $path = $file->store('projets', 's3');
-
-    //             $projet->images()->create([
-    //                 'path' => $path,
-    //                 'ordre' => $index,
-    //             ]);
-    //         }
-    //     }
-    // }
-
-//     private function storeImages(Projet $projet, Request $request)
-// {
-//     if ($request->hasFile('images')) {
-//         foreach ($request->file('images') as $index => $file) {
-//             dd($file); // <- ajoute ça pour inspecter l'objet
-//             if ($file->isValid()) {
-//                 $filename = time() . '_' . $file->getClientOriginalName();
-//                 $path = $file->storeAs('projets', $filename, 's3');
-
-//                  dd($path); // <- vérifie ce que storeAs retourne
-
-//                 $projet->images()->create([
-//                     'path' => $path,
-//                     'ordre' => $index,
-//                 ]);
-//             }
-//         }
-//     }
-// }
-
     private function storeImages(Projet $projet, Request $request)
     {
         if ($request->hasFile('images')) {
@@ -186,8 +152,6 @@ class ProjetController extends Controller
             }
         }
     }
-
-
 
     private function deleteImages(Projet $projet, Request $request)
     {

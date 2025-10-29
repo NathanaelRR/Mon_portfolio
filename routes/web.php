@@ -11,11 +11,6 @@ Route::get('/debug-files', function() {
     return response()->json($files);
 });
 
-Route::get('/debug-s3', function() {
-    $files = Storage::disk('s3')->allFiles('projets');
-    dd($files); // Affiche la liste des fichiers dans S3
-});
-
 // Route::get('/', [ProjetController::class, 'index'])->name('index');
 
  Route::resource('projets', ProjetController::class);

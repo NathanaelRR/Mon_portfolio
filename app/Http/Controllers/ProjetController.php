@@ -122,19 +122,72 @@ class ProjetController extends Controller
         }
     }
 
+    // private function storeImages(Projet $projet, Request $request)
+    // {
+    //     if ($request->hasFile('images')) {
+    //         foreach ($request->file('images') as $index => $file) {
+    //             $path = $file->store('projets', 's3');
+
+    //             $projet->images()->create([
+    //                 'path' => $path,
+    //                 'ordre' => $index,
+    //             ]);
+    //         }
+    //     }
+    // }
+
+//     private function storeImages(Projet $projet, Request $request)
+// {
+//     if ($request->hasFile('images')) {
+//         foreach ($request->file('images') as $index => $file) {
+//             dd($file); // <- ajoute ça pour inspecter l'objet
+//             if ($file->isValid()) {
+//                 $filename = time() . '_' . $file->getClientOriginalName();
+//                 $path = $file->storeAs('projets', $filename, 's3');
+
+//                  dd($path); // <- vérifie ce que storeAs retourne
+
+//                 $projet->images()->create([
+//                     'path' => $path,
+//                     'ordre' => $index,
+//                 ]);
+//             }
+//         }
+//     }
+// }
+
     private function storeImages(Projet $projet, Request $request)
     {
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $index => $file) {
-                $path = $file->store('projets', 's3');
+                // Vérifie que le fichier est valide
+                if ($file->isValid()) {
+                    // Génère un nom unique pour éviter les conflits
+                    $filename = time() . '_' . $file->getClientOriginalName();
 
-                $projet->images()->create([
-                    'path' => $path,
-                    'ordre' => $index,
-                ]);
+                    // Upload sur S3 dans le dossier "projets"
+                    $path = $file->storeAs('projets', $filename, 's3');
+
+                    // Vérifie que l'upload a réussi
+                    if (!$path) {
+                        // Tu peux logger l'erreur ou gérer comme tu veux
+                        \Log::error("Échec de l'upload pour le fichier : " . $file->getClientOriginalName());
+                        continue;
+                    }
+
+                    // Enregistre dans la BDD
+                    $projet->images()->create([
+                        'path' => $path,
+                        'ordre' => $index,
+                    ]);
+                } else {
+                    \Log::warning("Fichier invalide : " . $file->getClientOriginalName());
+                }
             }
         }
     }
+
+
 
     private function deleteImages(Projet $projet, Request $request)
     {

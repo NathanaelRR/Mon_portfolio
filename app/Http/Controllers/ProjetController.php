@@ -186,6 +186,7 @@ class ProjetController extends Controller
                             'categorie' => $categorie,
                             'titre' => $etape['titre'],
                             'description' => $etape['description'] ?? null,
+                            'ordre' => $etape['ordre'] ?? 0, 
                         ]);
                     } else {
                         $existing = $projet->etapes()->find($key);
